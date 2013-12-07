@@ -12,9 +12,14 @@ public class LifeGame {
     }
 
     public LifeStatus shouldALive(LifePosition lifePosition) {
-        if(calculateLifeAround(lifePosition) == 3)
+        if(calculateLifeAround(lifePosition) == 3 || calculateLifeAround(lifePosition) == 2 && alive(lifePosition))
             return LifeStatus.alive;
         return LifeStatus.dead;
+    }
+
+    private boolean alive(LifePosition lifePosition) {
+        return frame.getFrame()[lifePosition.getPosition()[0]][lifePosition.getPosition()[1]].equals("*")? true:false;
+
     }
 
     public int calculateLifeAround(LifePosition coord) {
