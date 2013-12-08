@@ -1,3 +1,7 @@
+import com.life.LifeFrame;
+import com.life.LifeGame;
+import com.life.LifePosition;
+import com.life.LifeStatus;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
