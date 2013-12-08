@@ -8,7 +8,22 @@ public class LifeGame {
     }
 
     public LifeFrame nextFrame() {
+        LifeFrame next = new LifeFrame(new String[frame.height()][frame.width()]);
+        for (int i = 0; i < frame.height(); i++) {
+            for (int j = 0; j < frame.width(); j++) {
+                LifePosition lifePosition = new LifePosition(i, j);
+                if (shouldALive(lifePosition).equals(LifeStatus.alive))
+                    next.changeStatusToAlive(lifePosition);
+                else
+                    next.changeStatusToDead(lifePosition);
+            }
+        }
+        refreshFrame(next);
         return frame;
+    }
+
+    private void refreshFrame(LifeFrame next) {
+        frame = next;
     }
 
     public LifeStatus shouldALive(LifePosition lifePosition) {
@@ -18,8 +33,7 @@ public class LifeGame {
     }
 
     private boolean alive(LifePosition lifePosition) {
-        return frame.getFrame()[lifePosition.getPosition()[0]][lifePosition.getPosition()[1]].equals("*")? true:false;
-
+          return frame.getLifeStatus(lifePosition).equals(LifeStatus.alive)?true:false;
     }
 
     public int calculateLifeAround(LifePosition coord) {
@@ -56,6 +70,6 @@ public class LifeGame {
 
     private boolean isPositionOutOfFrame(LifePosition lifePosition) {
         return lifePosition.getPosition()[0] < 0 || lifePosition.getPosition()[1] < 0
-           || lifePosition.getPosition()[0] >(frame.getFrame().length-1) || lifePosition.getPosition()[1] > (frame.getFrame()[0].length-1);
+           || lifePosition.getPosition()[0] >(frame.height()-1) || lifePosition.getPosition()[1] > (frame.width()-1);
     }
 }
