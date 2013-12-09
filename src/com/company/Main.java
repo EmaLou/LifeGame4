@@ -5,7 +5,7 @@ import com.life.LifeGame;
 
 public class Main {
     public static void main(String[] args) {
-        LifeFrame initFrame = new LifeFrame(new String[][]{
+        final LifeFrame initFrame = new LifeFrame(new String[][]{
                 {" ","*","*","*"," "," ","*","*","*","*"},
                 {" "," "," "," "," "," ","*"," ","*"," "},
                 {" ","*","*"," "," "," ","*"," ","*"," "},
@@ -16,9 +16,16 @@ public class Main {
                 {" "," "," "," "," "," "," "," "," "," "},
                 {" "," "," "," "," "," "," "," "," "," "},
                 {" "," "," "," "," "," "," "," "," "," "} });
-        LifeGame lifeGame = new LifeGame(initFrame);
+
+        final LifeGame lifeGame = new LifeGame(initFrame);
+
         while (true) {
-            lifeGame.print();
+            try {
+                lifeGame.print();
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
